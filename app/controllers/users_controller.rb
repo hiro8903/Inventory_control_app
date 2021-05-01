@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.paginate(page: params[:page])
+    @users = User.paginate(page: params[:page]).order(department_id: :ASC)
   end
   
   def show
@@ -13,10 +13,13 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @departments = Department.all
+    # debugger
   end
 
   def create
     @user = User.new(user_params)
+    @departments = Department.all
     if @user.save
       log_in @user
       flash[:success] = "Welcome to the Sample App!"
@@ -28,10 +31,12 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @departments = Department.all
   end
   
   def update
     @user = User.find(params[:id])
+    @departments = Department.all
     if @user.update_attributes(user_params)
       flash[:success] = "ユーザー情報を更新しました。"
       redirect_to @user
@@ -49,7 +54,8 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :department_id)
+      # params.require(:user).permit(:name, :email, :password, :password_confirmation, user_department_attributes: [:id, :name])
     end
 
     # beforeアクション

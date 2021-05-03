@@ -4,6 +4,7 @@ ja:
       session: セッション
       user: ユーザー
       department: 部署
+      manufacturer: メーカー
     attributes:
         session:
           email: メールアドレス
@@ -19,3 +20,6 @@ ja:
         department:
           id: ID
           name: 部署名
+        manufacturer:
+          id: ID
+          name: メーカー名

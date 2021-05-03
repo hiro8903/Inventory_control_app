@@ -4,9 +4,19 @@ def create_department(name)
 end
 
 create_department("購買部")
-create_department("製造A")
-create_department("製造B")
-create_department("製造C")
+create_department("製造部A")
+create_department("製造部B")
+create_department("製造部C")
+
+# メーカー作成
+def create_manufacturer(name)
+  Manufacturer.create!(name: name)
+end
+
+create_manufacturer("メーカーA")
+create_manufacturer("メーカーB")
+create_manufacturer("メーカーC")
+create_manufacturer("メーカーD")
 
 # ユーザー作成
 

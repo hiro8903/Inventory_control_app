@@ -1,0 +1,13 @@
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <li>
+      <%= supplier.name  %>
+      <% if current_user.admin? %>
+        <%= link_to "編集", edit_supplier_path(supplier), class: "btn btn-success" %>
+          <%= link_to "削除", supplier, method: :delete, 
+                              class: "btn btn-danger", data: { confirm: "#{supplier.name}を削除しても良いですか？" } %>
+      <% end %>
+    </li>
+  </div>
+</div>

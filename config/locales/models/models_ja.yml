@@ -5,6 +5,8 @@ ja:
       user: ユーザー
       department: 部署
       manufacturer: メーカー
+      supplier: 仕入先
+      paint: 塗料
     attributes:
         session:
           email: メールアドレス
@@ -23,3 +25,14 @@ ja:
         manufacturer:
           id: ID
           name: メーカー名
+        supplier:
+          id: ID
+          name: 仕入先名
+        paint:
+          name: 塗料名
+          manufacturer_id: メーカー
+          supplier_id: 仕入先
+          unit_price: 単価
+          unit: 単位
+          ordering_point: 発注点
+

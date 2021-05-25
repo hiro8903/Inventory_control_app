@@ -28,6 +28,18 @@ create_supplier("仕入先B")
 create_supplier("仕入先C")
 create_supplier("仕入先D")
 
+# 塗料作成
+def create_paint(name, manufacturer_id, supplier_id, unit_price, unit, ordering_point)
+  Paint.create!(name: name, manufacturer_id: manufacturer_id, supplier_id: supplier_id, unit_price: unit_price , unit: unit, ordering_point: ordering_point)
+end
+
+create_paint("トリョウ01", 1, 1, 5.0, "g", 50000)
+create_paint("トリョウ02", 1, 1, 6.0, "g", 55000)
+create_paint("トリョウ03", 2, 1, 7.0, "g", 60000)
+create_paint("トリョウ04", 3, 2, 8.0, "g", 65000)
+create_paint("トリョウ05", 3, 2, 9.0, "g", 70000)
+create_paint("トリョウ06", 4, 2, 10.0, "g", 75000)
+
 # ユーザー作成
 
 User.create!(name: "Example User",

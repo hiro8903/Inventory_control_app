@@ -1,0 +1,41 @@
+<% provide(:title, 'メーカー登録') %>
+<% provide(:button_text, '新規登録') %>
+
+<h1>新規塗料登録</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+
+   <%= render "form", paint: @paint %> 
+    <%
+=begin%>
+ <%= form_with model: @paint, local: true do |f| %>
+
+
+      <%= render 'shared/error_messages', object: @paint %>  
+
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+
+      <%= f.label :manufacturer_id %>
+      <%= f.collection_select :manufacturer_id, @manufacturers, :id, :name, {include_blank: "選択して下さい"}, class: "form-control" %>
+
+      <%= f.label :supplier_id %>
+      <%= f.collection_select :supplier_id, @suppliers, :id, :name, {include_blank: "選択して下さい"}, class: "form-control" %>
+
+      <%= f.label :unit_price %>
+      <%= f.number_field :unit_price, step: '0.1', placeholder: "半角数で入力してください。", class:'form-control' %>
+
+      <%= f.label :unit %>
+      <%= f.text_field :unit, pattern: '^[A-Za-z]+$', placeholder: "半角英で入力してください。", class:'form-control' %>
+
+      <%= f.label :ordering_point %>
+      <%= f.number_field :ordering_point, step: '0.1', placeholder: "半角数で入力してください。", class:'form-control' %>
+
+      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <% end %> 
+<%
+=end%>
+
+  </div>
+</div>

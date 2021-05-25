@@ -1,0 +1,41 @@
+<% provide(:title, 'All Paints') %>
+<h1>塗料 一覧</h1>
+
+<%
+=begin%>
+ <ul class="paints">
+  <%= render @paints %>
+</ul> 
+<%
+=end%>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+<!-- 塗料一覧テーブル -->
+<div>
+  <table class="table table-bordered table-condensed table-hober" id="table-paints">
+    <thead>
+      <tr>
+        <th>塗料名</th>
+        <th>メーカー</th>
+        <th>仕入先</th>
+        <th>単価</th>
+        <th>発注点</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render @paints %>
+    </tbody>
+    <tfoot>
+    </tfoot>
+  </table>
+</div>
+
+
+
+  </div>
+</div>
+
+  </div>
+</div>

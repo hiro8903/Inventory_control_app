@@ -1,0 +1,14 @@
+<tr>
+      <td><%= paint.name %></td>
+      <td><%= paint.manufacturer.name %></td>
+      <td><%= paint.supplier.name %></td>
+      <td><%= "#{paint.unit_price} /#{paint.unit}" %></td>
+      <td><%= p"#{paint.ordering_point} /#{paint.unit}" %></td>
+      <td><% if current_user.admin? %>
+        <%= link_to "編集", edit_paint_path(paint), class: "btn btn-success" %>
+          <%= link_to "削除", paint, method: :delete, 
+                              class: "btn btn-danger", data: { confirm: "#{paint.name}を削除しても良いですか？" } %>
+      </td>
+      <% end %>
+</tr>
+

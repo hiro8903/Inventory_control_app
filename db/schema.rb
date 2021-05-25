@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20210525112919) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.date "order_on", default: "2021-05-25"
+    t.date "order_on", default: "2021-05-26"
     t.float "quantity"
     t.date "desired_on"
     t.string "note"

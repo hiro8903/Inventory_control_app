@@ -50,7 +50,7 @@ create_order(Date.today, 2, 10000, Date.today.next_month)
 create_order(Date.today, 3, 10000, Date.today.next_month)
 create_order(Date.today, 4, 10000, Date.today.next_month)
 create_order(Date.today, 5, 10000, Date.today.next_month)
-create_order(Date.today.prev_month, 1, 10000, Date.end_of_month)
+create_order(Date.today.prev_month, 1, 10000, Date.today.end_of_month)
 
 # ユーザー作成
 

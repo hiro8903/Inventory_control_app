@@ -65,6 +65,12 @@ class PaintsController < ApplicationController
     end
   end
 
+  def destroy
+    @paint = Paint.find(params[:id]).destroy
+    flash[:success] = "#{@paint.name}を削除しました。"
+    redirect_to paints_url
+  end
+
   private
 
     def paint_params

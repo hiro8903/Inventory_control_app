@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  order_on: MyString
+  date: MyString
+  quantity: 1.5
+  desired_on: 2021-05-25
+  note: MyString
+  paint: one
+
+two:
+  order_on: MyString
+  date: MyString
+  quantity: 1.5
+  desired_on: 2021-05-25
+  note: MyString
+  paint: two

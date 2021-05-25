@@ -40,6 +40,18 @@ create_paint("トリョウ04", 3, 2, 8.0, "g", 65000)
 create_paint("トリョウ05", 3, 2, 9.0, "g", 70000)
 create_paint("トリョウ06", 4, 2, 10.0, "g", 75000)
 
+# 発注作成
+def create_order(order_on, paint_id, quantity, desired_on)
+  Order.create!(order_on: order_on, paint_id: paint_id, quantity: quantity, desired_on: desired_on )
+end
+
+create_order(Date.today, 1, 10000, Date.today.next_month)
+create_order(Date.today, 2, 10000, Date.today.next_month)
+create_order(Date.today, 3, 10000, Date.today.next_month)
+create_order(Date.today, 4, 10000, Date.today.next_month)
+create_order(Date.today, 5, 10000, Date.today.next_month)
+create_order(Date.today.prev_month, 1, 10000, Date.end_of_month)
+
 # ユーザー作成
 
 User.create!(name: "Example User",

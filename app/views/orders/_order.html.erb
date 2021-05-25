@@ -1,0 +1,20 @@
+<tr>
+      <td><%= order.order_on %></td>
+      <td><%= order.paint.name %></td>
+      <td><%= "#{order.quantity} /#{order.paint.unit}"%></td>
+      <td><%= order.desired_on.present? ? order.desired_on : "指定なし"  %></td>
+      <td><%= order.note%></td>
+      <td><% if current_user.admin? %>
+        <%= link_to "編集", edit_order_path(order), class: "btn btn-success" %>
+          <%= link_to "削除", order, method: :delete, 
+                              class: "btn btn-danger", data: { confirm: "
+                              下記を削除してよろしいですか？
+
+                              発注日：#{order.order_on} 
+                              塗料名：#{order.paint.name} 
+                                 数量：#{order.quantity}/#{order.paint.unit} 
+                              " } %>
+      </td>
+      <% end %>
+</tr>
+

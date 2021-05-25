@@ -1,0 +1,20 @@
+<%= form_with model: order, local: true do |f| %> 
+  <%= render 'shared/error_messages', object: @order %>   
+
+  <%= f.label :order_on %>
+  <%= f.date_field :order_on, class: 'form-control' %>
+
+  <%= f.label :paint_id %>
+  <%= f.collection_select :paint_id, @paints, :id, :name, {include_blank: "選択して下さい"}, class: "form-control" %>
+
+  <%= f.label :quantity %>
+  <%= f.number_field :quantity, step: '0.1', placeholder: "半角数で入力してください。", class:'form-control' %>
+
+  <%= f.label :desired_on %>
+  <%= f.date_field :desired_on, class: 'form-control' %>
+
+  <%= f.label :note %>
+  <%= f.text_area :note, class: 'form-control' %>
+  
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

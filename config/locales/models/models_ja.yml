@@ -7,6 +7,7 @@ ja:
       manufacturer: メーカー
       supplier: 仕入先
       paint: 塗料
+      order: 発注
     attributes:
         session:
           email: メールアドレス
@@ -35,4 +36,10 @@ ja:
           unit_price: 単価
           unit: 単位
           ordering_point: 発注点
-
+        order:
+          paint_id: 塗料
+          paint: 塗料
+          order_on: 発注日
+          quantity: 発注量
+          desired_on: 希望納期
+          note: 備考

@@ -13,5 +13,10 @@ Rails.application.routes.draw do
   resources :manufacturers
   resources :suppliers
   resources :paints
-  resources :orders
+  resources :orders do
+    collection do
+      patch :update_accept # ひと月分の勤怠申請に対する上長による判断
+    end
+  end
+  resources :answers
 end

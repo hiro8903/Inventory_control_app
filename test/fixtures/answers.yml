@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  answer_on: 2021-05-26
+  quantity: 1.5
+  note: MyString
+  order: one
+
+two:
+  answer_on: 2021-05-26
+  quantity: 1.5
+  note: MyString
+  order: two

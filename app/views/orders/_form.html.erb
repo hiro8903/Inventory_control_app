@@ -12,9 +12,18 @@
 
   <%= f.label :desired_on %>
   <%= f.date_field :desired_on, class: 'form-control' %>
-
-  <%= f.label :note %>
-  <%= f.text_area :note, class: 'form-control' %>
   
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+
+  <% if params[:action] == 'edit' %>
+    <%= link_to "削除", order, method: :delete, 
+                              class: "btn btn-danger", data: { confirm: "
+                              下記を削除してよろしいですか？
+
+                              発注日：#{order.order_on} 
+                              塗料名：#{order.paint.name} 
+                                 数量：#{order.quantity}/#{order.paint.unit} 
+                              " } %>
+
+  <% end %>
 <% end %>

@@ -1,0 +1,60 @@
+<%= render 'shared/error_messages', object: answer %>
+
+<!-- 発注情報 -->
+<h3>発注内容</h3>
+<table class="table table-bordered table-condensed table-hober" id="table-answers">
+  <tr>
+    <th>発注日</th>
+    <th>塗料名</th>
+    <th>発注残 / 発注量</th>
+    <th>希望納期</th>
+  </tr>
+  <tr>
+    <td><%= @order.order_on %></td>
+    <td><%= @order.paint.name %></td>
+    <td><%= "#{@remaining_quantity} / #{@order.quantity}" %></td>
+    <td><%= @order.desired_on %></td>
+  </tr>
+</table>
+  
+  <!-- 新規回答の場合のフォーム -->
+  <% if params[:action] == 'new' || params[:action] == 'create' %> 
+    <%= form_with model: answer, url: answers_path(order_id: answer.order.id), local: true do |f| %>
+
+      <%= f.label :answer_on %>
+      <%= f.date_field :answer_on, value: @order.desired_on , class: 'form-control' %>
+
+      <%= f.label :quantity %><%= " [ #{@order.paint.unit} ]" %>
+      <%= f.number_field :quantity, step: '0.1', placeholder: "半角数で入力してください。", value: @remaining_quantity, max: @remaining_quantity, class:'form-control' %>
+
+      <%= f.label :note %>
+      <%= f.text_area :note, class: 'form-control' %>
+      
+      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <% end %>
+  <!-- 回答編集の場合のフォーム -->
+  <% else %>
+    <%= form_with model: answer, local: true do |f| %>
+
+      <%= f.label :answer_on %>
+      <%= f.date_field :answer_on, value: @order.desired_on, class: 'form-control' %>
+
+      <%= f.label :quantity %><%= " [ #{@order.paint.unit} ]" %>
+      <%= f.number_field :quantity, step: '0.1', max: max_quantity(@remaining_quantity, answer.quantity), placeholder: "半角数で入力してください。", class:'form-control' %>
+
+      <%= f.label :note %>
+      <%= f.text_area :note, class: 'form-control' %>
+      
+      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+
+      <%= link_to "削除", answer, method: :delete, 
+                              class: "btn btn-danger", data: { confirm: "
+                              下記を削除してよろしいですか？
+
+                              納品日：#{answer.answer_on} 
+                                 数量：#{answer.quantity} 
+                                 備考：#{answer.note} 
+                              " } %>
+    <% end %> 
+  <% end %>
+

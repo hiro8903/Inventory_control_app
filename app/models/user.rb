@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   belongs_to :department
+  has_many :deliverys
   # attr_accessorを使って「仮想の」属性を作成する
   # user.remember_tokenメソッドを使ってトークンにアクセスできるようにし、かつ、トークンをデータベースに保存せずに実装する必要がある
   attr_accessor :remember_token

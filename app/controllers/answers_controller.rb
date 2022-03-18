@@ -17,7 +17,7 @@ class AnswersController < ApplicationController
   def create
     @answer = @order.answers.build(answer_params)
     if @answer.save
-      # quantity_over_the_order_balance_is_invalid(@answer)
+      @answer.deliverys.build(quantity: 0).save if @answer.deliverys.count == 0
       flash[:success] = "納期回答を登録しました。"
       redirect_to orders_url
     else
@@ -53,6 +53,7 @@ class AnswersController < ApplicationController
     end
     @remaining_quantity = @order.quantity - @answer_total_quantity
     if @answer.update_attributes(answer_params)
+
       if initial_answer_on != @answer.answer_on \
         || initial_quantity != @answer.quantity \
         || intiial_note != @answer.note
@@ -62,7 +63,8 @@ class AnswersController < ApplicationController
       end
       redirect_to orders_url
     else
-      render edit_answer_url(order_id: @order.id)
+      redirect_to edit_answer_url(@answer, order_id: @order.id)
+      # render 'edit'
     end
   end
 

@@ -15,8 +15,10 @@ Rails.application.routes.draw do
   resources :paints
   resources :orders do
     collection do
-      patch :update_accept # ひと月分の勤怠申請に対する上長による判断
+      patch :update_reaction # ひと月分の勤怠申請に対する上長による判断
     end
   end
   resources :answers
+  resources :deliveries
+    post '/deliveries', to: 'deliveries#update_invoice'
 end

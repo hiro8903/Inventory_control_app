@@ -2,7 +2,7 @@
   <%= render 'shared/error_messages', object: @order %>   
 
   <%= f.label :order_on %>
-  <%= f.date_field :order_on, class: 'form-control' %>
+  <%= f.date_field :order_on, value: date, class: 'form-control' %>
 
   <%= f.label :paint_id %>
   <%= f.collection_select :paint_id, @paints, :id, :name, {include_blank: "選択して下さい"}, class: "form-control" %>

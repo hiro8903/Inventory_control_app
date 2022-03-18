@@ -9,6 +9,7 @@ ja:
       paint: 塗料
       order: 発注
       answer: 回答
+      delivery: 入荷
     attributes:
         session:
           email: メールアドレス
@@ -51,3 +52,12 @@ ja:
           quantity: 納品数量
           note: 備考
           order_id: 発注
+        delivery:
+          delivery_on: 納入日
+          quantity: 納入量
+          lot_number: ロットナンバー
+          invoice: 請求書
+          arrival_confirmer_id: 納入確認者
+          invoice_confirmer_id: 請求書確認者
+          answer_id: 回答
+          answer: 回答

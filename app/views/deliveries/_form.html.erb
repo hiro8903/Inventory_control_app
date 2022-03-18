@@ -1,0 +1,73 @@
+<div class="col-md-4 col-md-offset-4">
+  <%= render 'shared/error_messages', object: delivery %>
+</div>
+
+<!-- 回答情報 -->
+<div class="col-md-2 col-md-offset-4">
+  <%= form_with model: @answer, local: true do |f| %>
+    <%= f.label :answer_on %>
+    <%= f.date_field :answer_on, value: @answer.answer_on, disabled: true, class: 'form-control' %>
+
+    <%= f.label :quantity %><%= " [ #{@answer.order.paint.unit} ]" %>
+    <%= f.number_field :quantity, value: @answer.quantity, disabled: true, class:'form-control' %>
+
+    <%= f.label :note %>
+    <%= f.text_area :note, disabled: true, class: 'form-control' %>
+  <% end %>
+</div>
+
+<div class="col-md-2">
+<!-- 新規入荷情報登録の場合のフォーム -->
+<% if params[:action] == 'new' || params[:action] == 'create' %> 
+  <%= form_with model: delivery, url: deliveries_path(answer_id: @answer.id), local: true do |f| %>
+
+    <%= f.label :delivery_on %>
+    <%= f.date_field :delivery_on, value: Date.today , class: 'form-control' %>
+
+    <%= f.label :quantity %><%= " [ #{@answer.order.paint.unit} ]" %>
+    <%= f.number_field :quantity, step: '0.1', placeholder: "半角数で入力してください。", value: @remaining_quantity, max: @remaining_quantity, class:'form-control' %>
+
+    <%= f.label :lot_number %>
+    <%= f.text_field :lot_number, class: 'form-control' %>
+
+    <%= f.label :arrival_confirmer_id %>
+    <%= f.collection_select :arrival_confirmer_id, @users, :id, :name, {value: current_user}, class: 'form-control' %>
+
+    <%= f.label :invoice_confirmer_id %>
+    <%= f.collection_select :invoice_confirmer_id, @users, :id, :name, {include_blank: true}, class: 'form-control' %>
+    
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  <% end %>
+  <!-- 入荷情報編集の場合のフォーム -->
+<% else %>
+  <%= form_with model: delivery, local: true do |f| %>
+
+    <%= f.label :delivery_on %>
+    <%= f.date_field :delivery_on, value: Date.today , class: 'form-control' %>
+
+    <%= f.label :quantity %><%= " [ #{@answer.order.paint.unit} ]" %>
+    <%= f.number_field :quantity, step: '0.1', placeholder: "半角数で入力してください。", value: @delivery.quantity, max: @remaining_quantity, class:'form-control' %>
+
+    <%= f.label :lot_number %>
+    <%= f.text_field :lot_number, class: 'form-control' %>
+
+    <%= f.label :arrival_confirmer_id %>
+    <%= f.collection_select :arrival_confirmer_id, @users, :id, :name, {value: "#{delivery.arrival_confirmer_id.nil? ? current_user : delivery.arrival_confirmer_id}"}, class: 'form-control' %>
+
+    <%= f.label :invoice_confirmer_id %>
+    <%= f.collection_select :invoice_confirmer_id, @users, :id, :name, {include_blank: true}, class: 'form-control' %>
+
+    
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+
+    <%= link_to "削除", @delivery, method: :delete, 
+                              class: "btn btn-danger", data: { confirm: "
+                              下記を削除してよろしいですか？
+
+                              納入日：#{@delivery.delivery_on} 
+                                 数量：#{@delivery.quantity} 
+                                 ロットナンバー：#{@delivery.lot_number} 
+                              " } %>
+  <% end %>
+<% end %>
+</div>

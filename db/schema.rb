@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210602114240) do
+ActiveRecord::Schema.define(version: 20210605192229) do
 
   create_table "answers", force: :cascade do |t|
     t.date "answer_on"
@@ -20,6 +20,19 @@ ActiveRecord::Schema.define(version: 20210602114240) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_answers_on_order_id"
+  end
+
+  create_table "deliveries", force: :cascade do |t|
+    t.date "delivery_on"
+    t.float "quantity"
+    t.string "lot_number"
+    t.boolean "invoice", default: false
+    t.integer "arrival_confirmer_id"
+    t.integer "invoice_confirmer_id"
+    t.integer "answer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answer_id"], name: "index_deliveries_on_answer_id"
   end
 
   create_table "departments", force: :cascade do |t|
@@ -35,13 +48,13 @@ ActiveRecord::Schema.define(version: 20210602114240) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.date "order_on", default: "2021-06-06"
+    t.date "order_on", default: "2022-01-02"
     t.float "quantity"
     t.date "desired_on"
     t.integer "paint_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "accept", default: false
+    t.boolean "reaction", default: false
     t.index ["paint_id"], name: "index_orders_on_paint_id"
   end
 

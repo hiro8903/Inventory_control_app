@@ -1,14 +1,12 @@
 <% provide(:title, 'All Oders') %>
-<div class="table-responsive">
 <h1>発注 一覧</h1>
 
-<div class="col-md-10 col-md-offset-1">
 <%= will_paginate  @orders %>
 
-  <!-- 発注・回答・入荷一覧テーブル -->
-  <table class="table table-striped  table-hover table-fixed table_sticky" id="table-orders">
-    <%= form_with url: update_accept_orders_path, method: :patch, local: true do |f| %>
-
+<!-- 発注・回答・入荷一覧テーブル -->
+<div class="table-responsive-xl">
+  <table class="table table-bordered table-striped  table-hover " id="table-orders">
+    <%= form_with url: update_reaction_orders_path, method: :patch, local: true do |f| %>
       <thead>
         <tr>
           <!-- 発注情報 -->
@@ -33,43 +31,73 @@
 
       <tbody>
         <% @orders.each do |order| %>
+        <% answer_num = 0 %>
           <tr>
-            <!-- 発注一覧 -->
-            <td><%= link_to "#{order.order_on}",edit_order_path(order) %></td>
-            <td><%= order.paint.supplier.name %></td>
-            <td><%= order.paint.name %></td>
-            <td><%= "#{order.quantity.to_s(:delimited)} / #{order.paint.unit}" %></td>
-            <td><%= order.desired_on.present? ? order.desired_on : "指定なし" %></td>
-
-            <!-- 回答一覧 -->
-            <td>
+            <!-- 発注情報 -->
+            <td rowspan=<%= order_row(order)%>>行：<%= order_row(order)%>発注日：<%= link_to "#{order.order_on}",edit_order_path(order), class: "btn-sm btn-success" %></td>
+            <td rowspan=<%= order_row(order)%>>仕入先1<%= order.paint.supplier.name %></td>
+            <td rowspan=<%= order_row(order)%>>塗料名1<%= order.paint.name %></td>
+            <td rowspan=<%= order_row(order)%>>発注量1<%= "#{order.quantity.to_s(:delimited)} / #{order.paint.unit}" %></td>
+            <td rowspan=<%= order_row(order)%>>希望納期1<%= order.desired_on.present? ? order.desired_on : "指定なし" %></td>
+            <td rowspan=<%= order_row(order)%>>
               <%= fields_for 'orders[]', order do |field| %>
-              <%= field.check_box :accept %>
+                <%= field.check_box :reaction %>
               <% end %>
             </td>
-            <td>
-                <% order.answers.all.each do |answer| %>
-                <%= answer_link(order, answer, answer.answer_on) %><br>
+            <!-- 回答１行目 -->
+            <% order.answers.each_with_index do |answer, answer_index| %>
+              <% answer_row_count = 0 %>
+              <% answer.deliverys.each_with_index do |delivery, delivery_index| %>
+                <% answer_row_count += 1 %>
+                <% if answer_row_count == 1 %>
+                  <td rowspan=<%= answer_table_row_times(answer) %>><%= link_to "#{answer.answer_on}", edit_answer_path(answer, order_id: order.id), class: "btn-sm btn-primary" %><br>納品残ある？<%= remaining_delivery?(answer) %></td>
+                  <td rowspan=<%= answer_table_row_times(answer) %>><%= answer.quantity %></td>
+                  <td rowspan=<%= answer_table_row_times(answer) %>><%# answer.note %>行：<%= answer_table_row_times(answer) %></td>
+                  <td rowspan=<%= answer_table_row_times(answer) %>><%= delivery.delivery_on %></td>
                 <% end %>
-                <%= button_to_answer_the_remaining_order(order) %>
-            </td>
-            <td>
-              <% order.answers.all.each do |answer| %>
-                <%= "#{answer.quantity.to_s(:delimited)}  / #{order.paint.unit}" %><br>
-              <% end %>
-            </td> 
-            <td>
-              <% order.answers.all.each do |answer| %>
-                <%= answer.note %><br>
-              <% end %>
-            </td> 
 
-            <!-- 入荷一覧 -->
-            <td><%=  %></td>
-            <td><%=  %></td>
-            <td><%=  %></td>
-            <td><%=  %></td>
-            <td><%=  %></td>
+                <!-- 回答１行目 納品情報-->
+                <!-- 回答１行目の納品１行目 -->
+                <% if delivery_index == 0 %>
+                  <td><%= delivery.quantity %></td>
+                  <td><%= delivery.lot_number.present? ? delivery.lot_number : "ー" %></td>
+                  <td>user_id：<%= delivery.arrival_confirmer_id %></td>
+                  <td>user_id：<%= delivery.invoice_confirmer_id %></td>
+                <!-- 回答１行目の納品２行目以降 -->
+                <% else %>
+                  <tr>
+                    <td><%= delivery.quantity %></td>
+                    <td><%= delivery.lot_number.present? ? delivery.lot_number : "ー" %></td>
+                    <td>user_id：<%= delivery.arrival_confirmer_id %></td>
+                    <td>user_id：<%= delivery.invoice_confirmer_id %></td>
+                  </tr>
+                <% end %>
+                <!-- 回答に対して納品残がある場合 -->
+                <% if delivery == answer.deliverys.last && remaining_delivery?(answer) %>
+                  <tr>
+                    <td>22222</td>
+                    <td></td>
+                    <td></td>
+                    <td><%= delivery_index %></td>
+                  </tr>
+                <% end %>
+                <!-- 発注に対して回答残がある場合 -->
+                <!-- 最後の行で回答残がある場合 -->
+                <!-- answer.countが１で量が０のとき -->
+                <% if (answer.order.answers.count > 1 && answer.quantity == 0) && delivery == answer.deliverys.last && remaining_answer?(order) %>
+                  <tr>
+                      <td>2:<%= answer_btn(order, answer_index) %></td>
+                      <td></td>
+                      <td></td>
+                      <td><%= delivery_index %></td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                      <td>-</td>
+                  </tr>
+                <% end %>
+              <% end %>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
@@ -78,8 +106,224 @@
       </tfoot>      
     <% end %>
   </table>
+</div>
+
+<div class="table-responsive-xl">
+  <table class="table table-bordered table-striped  table-hover " id="table-orders">
+    <%= form_with url: update_reaction_orders_path, method: :patch, local: true do |f| %>
+      <thead>
+        <tr>
+          <!-- 発注情報 -->
+          <th>発注日</th>
+          <th>仕入先</th>
+          <th>塗料名</th>
+          <th>発注量</th>
+          <th>希望納期</th>
+          <!-- 回答情報 -->
+          <th><button type="submit" class="btn-sm btn-primary">返信<br>有無</button></th>
+          <th>納品予定日</th>
+          <th>納品数量</th>
+          <th>備考</th>
+          <th>入荷日</th>
+          <!-- 入荷情報 -->
+          <th>納入量</th>
+          <th>ロット番号</th>
+          <th>入荷確認</th>
+          <th>請求書確認</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @orders.each do |order| %>
+        <% answer_num = 0 %>
+          <tr>
+            <!-- 発注情報 -->
+            <td rowspan=<%= order_table_row_times(order)%>><%= order_table_row_times(order)%>発注日：<%= link_to "#{order.order_on}",edit_order_path(order), class: "btn-sm btn-success" %></td>
+            <td rowspan=<%= order_table_row_times(order)%>>仕入先1<%= order_table_row_times(order) %><%= order.paint.supplier.name %></td>
+            <td rowspan=<%= order_table_row_times(order)%>><%= order_table_row_times(order)%>塗料名1<%= order.paint.name %></td>
+            <td rowspan=<%= order_table_row_times(order)%>>発注量1<%= "#{order.quantity.to_s(:delimited)} / #{order.paint.unit}" %></td>
+            <td rowspan=<%= order_table_row_times(order)%>>希望納期1<%= order.desired_on.present? ? order.desired_on : "指定なし" %></td>
+            <td rowspan=<%= order_table_row_times(order)%>>
+              <%= fields_for 'orders[]', order do |field| %>
+                <%= field.check_box :reaction %>
+              <% end %>
+            </td>
+            <!-- 納期回答があった場合 -->
+            <% order.answers.each_with_index do |answer, answer_index| %>
+              <% answer.deliverys.each_with_index do |delivery, delivery_index| %>
+                <!-- 一行目 -->
+                <% if order.answers.first == answer %>
+                  <!-- 一行目回答情報 納品予定日 -->
+                  <td rowspan=<%= answer_table_row_times(answer) %>>
+                    <div class="orders_table_order_data_order">
+                      <%= answer_link(order, order.answers, answer_index, answer) %>
+                      <br>回答1 <br>
+                      回答ー総納入量:<%= answer.quantity - answer_total_deliverys_quatity(answer) %>
+                    </div>
+                  </td>
+                  <!-- 一行目回答情報 納品数量-->
+                  <td rowspan=<%= answer_table_row_times(answer) %>><%= answer.quantity%></td>
+                  <!-- 一行目回答情報 備考-->
+                  <td rowspan=<%= answer_table_row_times(answer) %>>備考1</td>
+                  <% if answer.deliverys.first == delivery %>
+                    <!-- 一行目入荷情報 入荷日-->
+                    <% if delivery.delivery_on.present? %>
+                      <td rowspan=<%= answer_table_row_times(answer) %>>入荷日1:<%= link_to("#{delivery.delivery_on}", edit_delivery_path(answer, delivery)) %></td>
+                      <% else %>
+                      <td rowspan=<%= answer_table_row_times(answer) %>>入荷日1:<%= link_to("入荷待ち", edit_delivery_path(delivery)) %></td>
+                    <% end %>
+                    
+                      <td>納入量1:<%= delivery.quantity %></td>
+                      <td>ロット欄1:</td>
+                      <td>入荷確認1:</td>
+                      <td>請求書確認1:<%= %></td>
+                      <!-- 二行目以降入荷情報 -->
+                      <% if answer.quantity - answer_total_deliverys_quatity(answer) != 0 %>
+                        <tr>
+                          <td><%= link_to("残#{answer.quantity - answer_total_deliverys_quatity(answer)}", new_delivery_path(answer_id: answer.id)) %></td>
+                          <td>っっっっっっっっっっd</td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      <% else %>
+                        <% answer.deliverys.each do |delivery|%>
+                          <% if delivery != answer.deliverys.first %>
+                            <tr>
+                              <td><%= link_to("納入量#{delivery.quantity}", edit_delivery_path(delivery)) %></td>
+                              <td>dddddddddd</td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                  <% else delivery_index >=1  %>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  <% end %>
+                  <!-- 二行目以降 -->
+                  <% if order.answers.count == 1 && order_total_answers_quantity(order) < order.quantity %>
+                    <% answer_num += 1 %>
+                    <tr>
+                      <!-- 二行目回答情報 納品予定日-->
+                      <td>
+                        <div class="orders_table_order_data_order">
+                          <%= answer_link(order, order.answers, answer_index + 1, answer) %>
+                        </div>
+                      </td>
+                      <td>納品数量2</td>
+                      <td>備考2</td>
+                      <!-- 配達情報 一行目-->
+                      <% if delivery.delivery_on.present? %>
+                        <td>a<%= link_to("#{delivery.delivery_on}", edit_delivery_path(answer, delivery)) %></td>
+                      <% else answer.deliverys.present? %>
+                        <td>b<%= link_to("入荷待ち2", edit_delivery_path(answer, delivery)) %></td>
+                      <% end %>
+                      <td>納入量２<%= delivery.quantity %></td>
+                      <td>ロット番号2</td>
+                      <td>入荷確認2</td>
+                      <td>請求書確認2</td>
+                    </tr>
+                  <% end %>
+                <% else %><!-- 最初の回答ではない回答 -->
+                  <tr>
+                    <td rowspan=<%= answer_table_row_times(answer) %>><%= answer_link(order, order.answers, answer_index, answer) %>回答<%= answer_index + 1 %></td>
+                    <td rowspan=<%= answer_table_row_times(answer) %>>納品数量３：<%= answer.quantity%></td>
+                    <td rowspan=<%= answer_table_row_times(answer) %>><%# remaining_order(order, order.answers, answer_index, answer) %></td>
+                    <!-- 納品一行目 -->
+                    <% if answer.deliverys.first == delivery %>
+                      <% if delivery.delivery_on.present? %>
+                        <td><%= link_to("#{delivery.delivery_on}", edit_delivery_path(answer, delivery)) %></td>
+                      <% else answer.deliverys.present? %>
+                        <td><%= link_to("入荷待ち3", edit_delivery_path(answer, delivery)) %></td>
+                      <% end %>
+                      <td>あ</td>
+                      <td>s</td>
+                      <td>d</td>
+                      <td>f</td>
+                    <!-- 納品二行目以降 -->
+                    <% else %>
+                      <% answer.deliverys.each do |delivery| %>
+                        <tr>
+                          <td>ddddddd</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      <% end %>
+
+                        <tr>
+                          <td>qqq<%# answer_index %></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      <% end %>
+
+
+                  <% if order.answers.last != answer && (order.quantity - order_total_answers_quantity(order)) != 0 %>
+                        <tr>
+                          <td>qqq<%# answer_index %></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                  <% end %>
+
+                  </tr>
+                  <% if order.answers.last == answer && (order.quantity - order_total_answers_quantity(order)) != 0 %>
+                    <tr>
+                      <td><%= answer_link(order, order.answers, answer_index + 1, answer) %></td>
+                      <td>5</td>
+                      <td>4</td>
+                      <% if answer.deliverys.first == delivery %>
+                        <td><%# delivery.id %></td>
+                        <td><%= order.quantity - answer.quantity %></td>
+                        <td>6</td>
+                        <td></td>
+                        <td>7</td>
+                        <!-- 納品二行目以降 -->
+                      <% else %>
+                        <tr>
+                          <td><%# delivery.id %></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td>33332</td>
+                        </tr>
+                      <% end %>
+                    </tr>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+            <% if order.answers.blank?%>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+
+      <tfoot>
+      </tfoot>      
+    <% end %>
+  </table>
+</div>
+
 <%= will_paginate %>
-</div>
 
 
-</div>

@@ -1,0 +1,8 @@
+<% provide(:title, '入荷登録') %>
+<% provide(:button_text, '入荷を登録') %>
+
+<h1><%= @answer.order.paint.name %>　入荷登録</h1>
+
+<div class="row">
+    <%= render "form", delivery: @delivery %> 
+</div>

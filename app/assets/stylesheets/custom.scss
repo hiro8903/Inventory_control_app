@@ -255,21 +255,78 @@ input {
 
 // スクロールバーの実装
 
-.table_sticky {
-  display: block;
-  overflow-y: scroll;
-  height: calc(100vh/2);
-  border-collapse: collapse;
+// .table_sticky {
+//   display: block;
+//   overflow-y: scroll;
+//   height: calc(100vh/2);
+//   border-collapse: collapse;
+// }
+
+// .table_sticky thead th {
+//   position: sticky;
+//   top: 0;
+//   z-index: 1;
+//   background: #d3d3d3;
+//   text-align: center;
+// }
+
+// .table td {
+//   text-align: center;
+// }
+
+// .orders_table_data {
+//   margin: 7px;
+// }
+
+.orders_table_order_data_order {
+  margin-bottom: 7px;
+  
 }
 
-.table_sticky thead th {
+
+// table.st-tbl1 {
+// 	text-align: left;
+// 	position: relative;
+// 	border-collapse: collapse; 
+// }
+// table.st-tbl1 th,
+// table.st-tbl1 td{
+// 	padding: 1rem;
+// 	border: solid 1px #ddd;
+// }
+// table.st-tbl1 th {
+// 	background: white;
+// 	position: sticky;
+// 	top: 0;
+// }
+
+
+.st-tbl1 thead th {
+  /* 縦スクロール時を固定 */
   position: sticky;
   top: 0;
+  /* tbody内のセルより手前に表示する */
   z-index: 1;
-  background: #d3d3d3;
-  text-align: center;
 }
-
-.table td {
-  text-align: center;
+.st-tbl1 th:first-child {
+  /* 横スクロールを固定 */
+  position: sticky;
+  left: 0;
+  background: #f1f1fd;
+}
+.st-tbl1 thead th:first-child {
+  /* 一番左端のthead thが横スクロール時に隠れない様に */
+  z-index: 2;
+  background: #424242;
+}
+.st-tbl1 th,
+.st-tbl1 td{
+  border-collapse: collapse;
+  text-align: left;
+  padding: .2rem .5rem;
+  font-weight: normal;
+}
+.st-tbl1 thead th {
+  background: #424242;
+  color: #E0E0E0;
 }

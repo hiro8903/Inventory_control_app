@@ -1,5 +1,6 @@
 class Answer < ApplicationRecord
   belongs_to :order
+  has_many :deliverys, dependent: :destroy
   validates :quantity,  presence: true
   validate :quantity_over_the_order_balance_is_invalid
 

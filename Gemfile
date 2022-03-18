@@ -14,10 +14,14 @@ gem 'coffee-rails',            '4.2.2'
 gem 'jquery-rails',            '4.3.1'
 gem 'turbolinks',              '5.0.1'
 gem 'jbuilder',                '2.7.0'
+gem "awesome_print"                    # コンソールやログ等の出力を見やすくする。頭にapをつける　例：ap Answer.where(order_id: 1)
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
   gem 'byebug',  '9.0.6', platform: :mri
+  gem 'pry-rails' # debuggerの代わりにbinding.pryをcontroller内に挟むことで、オブジェクトの値が見やすくなる
+  # gem 'hirb'
+  # gem 'hirb-unicode'
 end
 
 group :development do

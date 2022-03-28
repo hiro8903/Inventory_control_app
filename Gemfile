@@ -20,6 +20,7 @@ group :development, :test do
   gem 'sqlite3', '1.3.13'
   gem 'byebug',  '9.0.6', platform: :mri
   gem 'pry-rails' # debuggerの代わりにbinding.pryをcontroller内に挟むことで、オブジェクトの値が見やすくなる
+  gem 'solargraph'
   # gem 'hirb'
   # gem 'hirb-unicode'
 end

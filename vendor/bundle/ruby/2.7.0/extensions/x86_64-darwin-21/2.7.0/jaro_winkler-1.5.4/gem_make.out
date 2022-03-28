@@ -1,0 +1,273 @@
+current directory: /Users/arakihiroki/workspace/sample_app/vendor/bundle/ruby/2.7.0/gems/jaro_winkler-1.5.4/ext/jaro_winkler
+/Users/arakihiroki/.rbenv/versions/2.7.1/bin/ruby -I /Users/arakihiroki/.rbenv/versions/2.7.1/lib/ruby/2.7.0 -r ./siteconf20220328-46521-1pxw05h.rb extconf.rb
+creating Makefile
+
+current directory: /Users/arakihiroki/workspace/sample_app/vendor/bundle/ruby/2.7.0/gems/jaro_winkler-1.5.4/ext/jaro_winkler
+make "DESTDIR=" clean
+
+current directory: /Users/arakihiroki/workspace/sample_app/vendor/bundle/ruby/2.7.0/gems/jaro_winkler-1.5.4/ext/jaro_winkler
+make "DESTDIR="
+compiling adj_matrix.c
+compiling codepoints.c
+compiling jaro.c
+compiling jaro_winkler.c
+jaro_winkler.c:19:3: warning: incompatible function pointer types passing 'VALUE (size_t, VALUE *, VALUE)' (aka 'unsigned long (unsigned long, unsigned long *, unsigned long)') to parameter of type 'VALUE (*)(int, union (unnamed union at /Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/intern.h:1195:1), VALUE)' (aka 'unsigned long (*)(int, union (unnamed at /Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/intern.h:1195:1), unsigned long)') [-Wincompatible-function-pointer-types]
+  rb_define_singleton_method(rb_mJaroWinkler, "distance",
+  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/intern.h:1218:137: note: expanded from macro 'rb_define_singleton_method'
+#define rb_define_singleton_method(klass, mid, func, arity) rb_define_singleton_method_choose_prototypem3((arity),(func))((klass),(mid),(func),(arity));
+                                                                                                                                        ^~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/intern.h:1195:1: note: passing argument to parameter 'func' here
+RB_METHOD_DEFINITION_DECL(rb_define_singleton_method, (2,3), (VALUE klass, const char *name), (klass, name))
+^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/intern.h:1091:77: note: expanded from macro 'RB_METHOD_DEFINITION_DECL'
+RB_METHOD_DEFINITION_DECL_1(def,nonnull,def##m2,-2,decl,vars,(VALUE,VALUE)) \
+                                                                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/intern.h:1108:5: note: expanded from macro '\
+RB_METHOD_DEFINITION_DECL_M1'
+    RB_METHOD_DEFINITION_DECL_C(def,nonnull,defname,decl,vars,(int,union{VALUE*x;const VALUE*y;}__attribute__((__transparent_union__)),VALUE))
+    ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/intern.h:1042:118: note: expanded from macro 'RB_METHOD_DEFINITION_DECL_C'
+    __attribute__((__unused__,__weakref__(#def),__nonnull__ nonnull))static void defname(RB_UNWRAP_MACRO decl,VALUE(*func)funcargs,int arity);
+                                                                                                                     ^
+jaro_winkler.c:21:3: warning: incompatible function pointer types passing 'VALUE (size_t, VALUE *, VALUE)' (aka 'unsigned long (unsigned long, unsigned long *, unsigned long)') to parameter of type 'VALUE (*)(int, union (unnamed union at /Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/intern.h:1195:1), VALUE)' (aka 'unsigned long (*)(int, union (unnamed at /Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/intern.h:1195:1), unsigned long)') [-Wincompatible-function-pointer-types]
+  rb_define_singleton_method(rb_mJaroWinkler, "jaro_distance", rb_jaro_distance,
+  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/intern.h:1218:137: note: expanded from macro 'rb_define_singleton_method'
+#define rb_define_singleton_method(klass, mid, func, arity) rb_define_singleton_method_choose_prototypem3((arity),(func))((klass),(mid),(func),(arity));
+                                                                                                                                        ^~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/intern.h:1195:1: note: passing argument to parameter 'func' here
+RB_METHOD_DEFINITION_DECL(rb_define_singleton_method, (2,3), (VALUE klass, const char *name), (klass, name))
+^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/intern.h:1091:77: note: expanded from macro 'RB_METHOD_DEFINITION_DECL'
+RB_METHOD_DEFINITION_DECL_1(def,nonnull,def##m2,-2,decl,vars,(VALUE,VALUE)) \
+                                                                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/intern.h:1108:5: note: expanded from macro '\
+RB_METHOD_DEFINITION_DECL_M1'
+    RB_METHOD_DEFINITION_DECL_C(def,nonnull,defname,decl,vars,(int,union{VALUE*x;const VALUE*y;}__attribute__((__transparent_union__)),VALUE))
+    ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/intern.h:1042:118: note: expanded from macro 'RB_METHOD_DEFINITION_DECL_C'
+    __attribute__((__unused__,__weakref__(#def),__nonnull__ nonnull))static void defname(RB_UNWRAP_MACRO decl,VALUE(*func)funcargs,int arity);
+                                                                                                                     ^
+jaro_winkler.c:37:45: warning: '(' and '{' tokens introducing statement expression appear in different macro expansion contexts [-Wcompound-token-split-by-macro]
+    VALUE weight = rb_hash_aref(opt, ID2SYM(rb_intern("weight"))),
+                                            ^~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1847:23: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                      ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:414:29: note: expanded from macro 'ID2SYM'
+#define ID2SYM(x) RB_ID2SYM(x)
+                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:409:33: note: expanded from macro 'RB_ID2SYM'
+#define RB_ID2SYM(x) (rb_id2sym(x))
+                                ^
+jaro_winkler.c:37:45: note: '{' token is here
+    VALUE weight = rb_hash_aref(opt, ID2SYM(rb_intern("weight"))),
+                                            ^~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1847:24: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1832:5: note: expanded from macro 'RUBY_CONST_ID_CACHE'
+    {                                                   \
+    ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:414:29: note: expanded from macro 'ID2SYM'
+#define ID2SYM(x) RB_ID2SYM(x)
+                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:409:33: note: expanded from macro 'RB_ID2SYM'
+#define RB_ID2SYM(x) (rb_id2sym(x))
+                                ^
+jaro_winkler.c:37:45: warning: '}' and ')' tokens terminating statement expression appear in different macro expansion contexts [-Wcompound-token-split-by-macro]
+    VALUE weight = rb_hash_aref(opt, ID2SYM(rb_intern("weight"))),
+                                            ^~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1847:24: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1837:5: note: expanded from macro 'RUBY_CONST_ID_CACHE'
+    }
+    ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:414:29: note: expanded from macro 'ID2SYM'
+#define ID2SYM(x) RB_ID2SYM(x)
+                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:409:33: note: expanded from macro 'RB_ID2SYM'
+#define RB_ID2SYM(x) (rb_id2sym(x))
+                                ^
+jaro_winkler.c:37:45: note: ')' token is here
+    VALUE weight = rb_hash_aref(opt, ID2SYM(rb_intern("weight"))),
+                                            ^~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1847:56: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                                                       ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:414:29: note: expanded from macro 'ID2SYM'
+#define ID2SYM(x) RB_ID2SYM(x)
+                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:409:33: note: expanded from macro 'RB_ID2SYM'
+#define RB_ID2SYM(x) (rb_id2sym(x))
+                                ^
+jaro_winkler.c:38:48: warning: '(' and '{' tokens introducing statement expression appear in different macro expansion contexts [-Wcompound-token-split-by-macro]
+          threshold = rb_hash_aref(opt, ID2SYM(rb_intern("threshold"))),
+                                               ^~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1847:23: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                      ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:414:29: note: expanded from macro 'ID2SYM'
+#define ID2SYM(x) RB_ID2SYM(x)
+                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:409:33: note: expanded from macro 'RB_ID2SYM'
+#define RB_ID2SYM(x) (rb_id2sym(x))
+                                ^
+jaro_winkler.c:38:48: note: '{' token is here
+          threshold = rb_hash_aref(opt, ID2SYM(rb_intern("threshold"))),
+                                               ^~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1847:24: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1832:5: note: expanded from macro 'RUBY_CONST_ID_CACHE'
+    {                                                   \
+    ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:414:29: note: expanded from macro 'ID2SYM'
+#define ID2SYM(x) RB_ID2SYM(x)
+                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:409:33: note: expanded from macro 'RB_ID2SYM'
+#define RB_ID2SYM(x) (rb_id2sym(x))
+                                ^
+jaro_winkler.c:38:48: warning: '}' and ')' tokens terminating statement expression appear in different macro expansion contexts [-Wcompound-token-split-by-macro]
+          threshold = rb_hash_aref(opt, ID2SYM(rb_intern("threshold"))),
+                                               ^~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1847:24: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1837:5: note: expanded from macro 'RUBY_CONST_ID_CACHE'
+    }
+    ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:414:29: note: expanded from macro 'ID2SYM'
+#define ID2SYM(x) RB_ID2SYM(x)
+                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:409:33: note: expanded from macro 'RB_ID2SYM'
+#define RB_ID2SYM(x) (rb_id2sym(x))
+                                ^
+jaro_winkler.c:38:48: note: ')' token is here
+          threshold = rb_hash_aref(opt, ID2SYM(rb_intern("threshold"))),
+                                               ^~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1847:56: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                                                       ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:414:29: note: expanded from macro 'ID2SYM'
+#define ID2SYM(x) RB_ID2SYM(x)
+                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:409:33: note: expanded from macro 'RB_ID2SYM'
+#define RB_ID2SYM(x) (rb_id2sym(x))
+                                ^
+jaro_winkler.c:39:50: warning: '(' and '{' tokens introducing statement expression appear in different macro expansion contexts [-Wcompound-token-split-by-macro]
+          ignore_case = rb_hash_aref(opt, ID2SYM(rb_intern("ignore_case"))),
+                                                 ^~~~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1847:23: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                      ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:414:29: note: expanded from macro 'ID2SYM'
+#define ID2SYM(x) RB_ID2SYM(x)
+                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:409:33: note: expanded from macro 'RB_ID2SYM'
+#define RB_ID2SYM(x) (rb_id2sym(x))
+                                ^
+jaro_winkler.c:39:50: note: '{' token is here
+          ignore_case = rb_hash_aref(opt, ID2SYM(rb_intern("ignore_case"))),
+                                                 ^~~~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1847:24: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1832:5: note: expanded from macro 'RUBY_CONST_ID_CACHE'
+    {                                                   \
+    ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:414:29: note: expanded from macro 'ID2SYM'
+#define ID2SYM(x) RB_ID2SYM(x)
+                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:409:33: note: expanded from macro 'RB_ID2SYM'
+#define RB_ID2SYM(x) (rb_id2sym(x))
+                                ^
+jaro_winkler.c:39:50: warning: '}' and ')' tokens terminating statement expression appear in different macro expansion contexts [-Wcompound-token-split-by-macro]
+          ignore_case = rb_hash_aref(opt, ID2SYM(rb_intern("ignore_case"))),
+                                                 ^~~~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1847:24: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1837:5: note: expanded from macro 'RUBY_CONST_ID_CACHE'
+    }
+    ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:414:29: note: expanded from macro 'ID2SYM'
+#define ID2SYM(x) RB_ID2SYM(x)
+                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:409:33: note: expanded from macro 'RB_ID2SYM'
+#define RB_ID2SYM(x) (rb_id2sym(x))
+                                ^
+jaro_winkler.c:39:50: note: ')' token is here
+          ignore_case = rb_hash_aref(opt, ID2SYM(rb_intern("ignore_case"))),
+                                                 ^~~~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1847:56: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                                                       ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:414:29: note: expanded from macro 'ID2SYM'
+#define ID2SYM(x) RB_ID2SYM(x)
+                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:409:33: note: expanded from macro 'RB_ID2SYM'
+#define RB_ID2SYM(x) (rb_id2sym(x))
+                                ^
+jaro_winkler.c:40:48: warning: '(' and '{' tokens introducing statement expression appear in different macro expansion contexts [-Wcompound-token-split-by-macro]
+          adj_table = rb_hash_aref(opt, ID2SYM(rb_intern("adj_table")));
+                                               ^~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1847:23: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                      ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:414:29: note: expanded from macro 'ID2SYM'
+#define ID2SYM(x) RB_ID2SYM(x)
+                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:409:33: note: expanded from macro 'RB_ID2SYM'
+#define RB_ID2SYM(x) (rb_id2sym(x))
+                                ^
+jaro_winkler.c:40:48: note: '{' token is here
+          adj_table = rb_hash_aref(opt, ID2SYM(rb_intern("adj_table")));
+                                               ^~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1847:24: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1832:5: note: expanded from macro 'RUBY_CONST_ID_CACHE'
+    {                                                   \
+    ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:414:29: note: expanded from macro 'ID2SYM'
+#define ID2SYM(x) RB_ID2SYM(x)
+                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:409:33: note: expanded from macro 'RB_ID2SYM'
+#define RB_ID2SYM(x) (rb_id2sym(x))
+                                ^
+jaro_winkler.c:40:48: warning: '}' and ')' tokens terminating statement expression appear in different macro expansion contexts [-Wcompound-token-split-by-macro]
+          adj_table = rb_hash_aref(opt, ID2SYM(rb_intern("adj_table")));
+                                               ^~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1847:24: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1837:5: note: expanded from macro 'RUBY_CONST_ID_CACHE'
+    }
+    ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:414:29: note: expanded from macro 'ID2SYM'
+#define ID2SYM(x) RB_ID2SYM(x)
+                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:409:33: note: expanded from macro 'RB_ID2SYM'
+#define RB_ID2SYM(x) (rb_id2sym(x))
+                                ^
+jaro_winkler.c:40:48: note: ')' token is here
+          adj_table = rb_hash_aref(opt, ID2SYM(rb_intern("adj_table")));
+                                               ^~~~~~~~~~~~~~~~~~~~~~
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:1847:56: note: expanded from macro 'rb_intern'
+        __extension__ (RUBY_CONST_ID_CACHE((ID), (str))) : \
+                                                       ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:414:29: note: expanded from macro 'ID2SYM'
+#define ID2SYM(x) RB_ID2SYM(x)
+                            ^
+/Users/arakihiroki/.rbenv/versions/2.7.1/include/ruby-2.7.0/ruby/ruby.h:409:33: note: expanded from macro 'RB_ID2SYM'
+#define RB_ID2SYM(x) (rb_id2sym(x))
+                                ^
+10 warnings generated.
+linking shared-object jaro_winkler/jaro_winkler_ext.bundle
+
+current directory: /Users/arakihiroki/workspace/sample_app/vendor/bundle/ruby/2.7.0/gems/jaro_winkler-1.5.4/ext/jaro_winkler
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 jaro_winkler_ext.bundle ./.gem.20220328-46521-171o9jn/jaro_winkler

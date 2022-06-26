@@ -272,4 +272,15 @@ module OrdersHelper
     return total_row
   end
 
+
+  def delivery_link(answer, delivery)
+    if delivery.delivery_on.blank?
+      link_to "未入荷", edit_delivery_path(delivery, answer_id: answer.id), class: "btn-sm btn-primary"
+    elsif delivery.delivery_on.present?
+      link_to "#{delivery.delivery_on}", edit_delivery_path(delivery, answer_id: answer.id), class: "btn-sm btn-success"
+    else
+      link_to("残#{answer.quantity - answer_total_deliverys_quatity(answer)}", new_delivery_path(answer_id: answer.id))
+    end
+  end
+  
 end

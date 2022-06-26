@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :paints
   resources :orders do
     collection do
-      patch :update_reaction # ひと月分の勤怠申請に対する上長による判断
+      patch :update_reaction
     end
   end
   resources :answers

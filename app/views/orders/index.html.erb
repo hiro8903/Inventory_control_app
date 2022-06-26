@@ -53,12 +53,12 @@
                   <td rowspan=<%= answer_table_row_times(answer) %>><%= link_to "#{answer.answer_on}", edit_answer_path(answer, order_id: order.id), class: "btn-sm btn-primary" %><br>納品残ある？<%= remaining_delivery?(answer) %></td>
                   <td rowspan=<%= answer_table_row_times(answer) %>><%= answer.quantity %></td>
                   <td rowspan=<%= answer_table_row_times(answer) %>><%# answer.note %>行：<%= answer_table_row_times(answer) %></td>
-                  <td rowspan=<%= answer_table_row_times(answer) %>><%= delivery.delivery_on %></td>
                 <% end %>
 
                 <!-- 回答１行目 納品情報-->
                 <!-- 回答１行目の納品１行目 -->
                 <% if delivery_index == 0 %>
+                  <td><%= delivery_link(answer, delivery) %></td>
                   <td><%= delivery.quantity %></td>
                   <td><%= delivery.lot_number.present? ? delivery.lot_number : "ー" %></td>
                   <td>user_id：<%= delivery.arrival_confirmer_id %></td>
@@ -66,6 +66,7 @@
                 <!-- 回答１行目の納品２行目以降 -->
                 <% else %>
                   <tr>
+                    <td><%= delivery_link(answer, delivery) %></td>
                     <td><%= delivery.quantity %></td>
                     <td><%= delivery.lot_number.present? ? delivery.lot_number : "ー" %></td>
                     <td>user_id：<%= delivery.arrival_confirmer_id %></td>
@@ -75,7 +76,7 @@
                 <!-- 回答に対して納品残がある場合 -->
                 <% if delivery == answer.deliverys.last && remaining_delivery?(answer) %>
                   <tr>
-                    <td>22222</td>
+                    <td><%= delivery_link(answer, delivery) %></td>
                     <td></td>
                     <td></td>
                     <td><%= delivery_index %></td>
